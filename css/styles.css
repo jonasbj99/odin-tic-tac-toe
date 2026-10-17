@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "League Spartan";
+  src: url("../fonts/league-spartan.ttf");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("../fonts/source-sans-3.ttf");
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("../fonts/source-sans-3-italic.ttf");
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+:root {
+  --main-col: #fff;
+  --prim-col: #fb0;
+  --text-col: #202020;
+  --title-font: "League Spartan", Arial, sans-serif;
+  --text-font: "Source Sans 3", Verdana, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--text-font);
+}
