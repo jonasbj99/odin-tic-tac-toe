@@ -1,10 +1,11 @@
+const BOARD_SIZE = 3;
+
 function Gameboard() {
-  const boardSize = 3;
   const board = [];
 
-  for (let i = 0; i < boardSize; i++) {
+  for (let i = 0; i < BOARD_SIZE; i++) {
     board[i] = [];
-    for (let j = 0; j < boardSize; j++) {
+    for (let j = 0; j < BOARD_SIZE; j++) {
       board[i].push(Cell());
     }
   }
@@ -14,19 +15,25 @@ function Gameboard() {
   const changeCell = (row, column, player) => {
     const cell = board[row][column];
 
-    if (cell.getValue() != 0) return;
+    if (cell.getValue() != 0) return false;
 
     board[row][column].setValue(player);
+
+    return true;
   };
 
   const printBoard = () => {
-    const boardWithCellValues = board.map((row) =>
+    const cellValueBoard = board.map((row) =>
       row.map((cell) => cell.getValue()),
     );
-    console.log(boardWithCellValues);
+    console.log(cellValueBoard);
   };
 
-  return { getBoard, changeCell, printBoard };
+  const resetBoard = () => {
+    board.map((row) => row.map((cell) => cell.setValue(0)));
+  };
+
+  return { getBoard, changeCell, printBoard, resetBoard };
 }
 
 function Cell() {
@@ -66,34 +73,77 @@ function GameController() {
     console.log(`It's ${activePlayer.name}'s turn`);
   };
 
-  const checkWin = () => {
-    const b = board.getBoard();
+  const checkWin = (row, col) => {
+    const currentBoard = board.getBoard();
+    let won = false;
 
-    // Test Check
-    if (
-      b[0][0].getValue() === b[0][1].getValue() &&
-      b[0][1].getValue() === b[0][2].getValue()
-    ) {
-      return true;
-    } else {
-      return false;
+    const directions = [
+      [1, 0], // Vertical
+      [0, 1], // Horizontal
+      [1, 1], // Diagonal TL
+      [-1, 1], // Diagonal TR
+    ];
+
+    for (const dir of directions) {
+      let score = 1;
+
+      for (const neg of [1, -1]) {
+        let newRow = row;
+        let newCol = col;
+        let withinBoard = true;
+        let multi = 1;
+
+        while (withinBoard) {
+          newRow += dir[0] * multi * neg;
+          newCol += dir[1] * multi * neg;
+
+          const rowSafe = newRow >= 0 && newRow < BOARD_SIZE;
+          const colSafe = newCol >= 0 && newCol < BOARD_SIZE;
+
+          if (rowSafe && colSafe) {
+            const currentVal = currentBoard[newRow][newCol].getValue();
+            if (currentVal === activePlayer.value) ++score;
+          } else {
+            withinBoard = false;
+          }
+        }
+
+        multi++;
+      }
+
+      if (score >= BOARD_SIZE) {
+        won = true;
+        break;
+      }
     }
+
+    return won;
   };
 
-  const playRound = (row, column) => {
-    board.changeCell(row, column, activePlayer.value);
-
-    if (checkWin()) {
-      console.log("Game Finished");
+  const playRound = (row, col) => {
+    if (board.changeCell(row, col, activePlayer.value)) {
+      if (checkWin(row, col)) {
+        board.printBoard();
+        console.log(activePlayer.name + " won the game!");
+      } else {
+        switchActivePlayer();
+        printRound();
+      }
     } else {
-      switchActivePlayer();
+      console.log("That cell has already been selected, try again.");
       printRound();
     }
   };
 
+  const restartGame = () => {
+    board.resetBoard();
+    activePlayer = players[0];
+    printRound();
+  };
+
   printRound();
 
-  return { getActivePlayer, playRound };
+  return { getActivePlayer, playRound, restartGame };
 }
 
 const game = GameController();
