@@ -14,52 +14,56 @@
     <script src="./js/tictactoe.js" defer></script>
   </head>
   <body>
-    <!-- <dialog id="startDialog">
-      <form>
-        <h2>Choose Names</h2>
+    <dialog id="startDialog">
+      <h2>Choose Your Names</h2>
+      <div class="col-center">
         <label for="p1Name">
           Player 1 Name:
-          <div>
+          <div class="row-center">
             <img src="./img/jbj-circle.svg" alt="Player 1 token" />
-            <input id="p1Name" type="text" placeholder="Player 1" />
+            <input id="p1Input" type="text" placeholder="Player 1" />
           </div>
         </label>
         <label for="p2Name">
           Player 2 Name:
-          <div>
+          <div class="row-center">
             <img src="./img/jbj-cross.svg" alt="Player 2 token" />
-            <input id="p2Name" type="text" placeholder="Player 2" />
+            <input id="p2Input" type="text" placeholder="Player 2" />
           </div>
         </label>
-        <button>Start Game</button>
-      </form>
+        <button class="dialog-btn" id="startBtn">Start Game</button>
+      </div>
     </dialog>
-    <dialog id="winDialog">
-      <h2>Player X Won!</h2>
-      <button>Play Again</button>
-    </dialog> -->
-    <header>
-      <div id="p1Tag" class="player-tag">
-        <img src="./img/jbj-circle.svg" alt="First player token" />
-        <p>Player 1</p>
-      </div>
-      <div class="title-container">
-        <h1>Tic Tac Toe</h1>
-      </div>
-      <div id="p2Tag" class="player-tag">
-        <p>Player 2</p>
-        <img src="./img/jbj-cross.svg" alt="Second player token" />
-      </div>
-      <div class="message-container">
-        <p id="messageEl">PLAYER WHOEVER's TURN</p>
-      </div>
-    </header>
-    <main id="gameboardEl"></main>
-    <footer class="footer">
-      <a class="contact-link" href="https://github.com/jonasbj99">
-        <i class="fa-brands fa-github"></i>
-        jonasbj99
-      </a>
-    </footer>
+
+    <dialog id="endDialog">
+      <h2 id="endTitle">Game Over</h2>
+      <button class="dialog-btn" id="restartBtn">Play Again</button>
+    </dialog>
+
+    <div class="fullscreen">
+      <header>
+        <div id="p1Tag" class="player-tag">
+          <img src="./img/jbj-circle.svg" alt="First player token" />
+          <p>Player 1</p>
+        </div>
+        <div class="title-container">
+          <h1>Tic Tac Toe</h1>
+        </div>
+        <div id="p2Tag" class="player-tag">
+          <p>Player 2</p>
+          <img src="./img/jbj-cross.svg" alt="Second player token" />
+        </div>
+        <div class="message-container">
+          <p id="messageEl">Ready to play?</p>
+        </div>
+      </header>
+      <main id="gameboardEl"></main>
+      <footer class="footer">
+        <a class="contact-link" href="https://github.com/jonasbj99">
+          <i class="fa-brands fa-github"></i>
+          jonasbj99
+        </a>
+      </footer>
+    </div>
   </body>
 </html>

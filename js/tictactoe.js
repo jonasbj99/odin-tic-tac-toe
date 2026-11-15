@@ -2,11 +2,16 @@ const BOARD_SIZE = 3;
 
 // Elements
 const startDialog = document.getElementById("startDialog");
-const winDialog = document.getElementById("winDialog");
+const p1Input = document.getElementById("p1Input");
+const p2Input = document.getElementById("p2Input");
+const startBtn = document.getElementById("startBtn");
+const endDialog = document.getElementById("endDialog");
+const endTitle = document.getElementById("endTitle");
+const restartBtn = document.getElementById("restartBtn");
+const p1Tag = document.getElementById("p1Tag");
+const p2Tag = document.getElementById("p2Tag");
 const gameboardEl = document.getElementById("gameboardEl");
 const messageEl = document.getElementById("messageEl");
-const player1El = document.getElementById("p1Tag");
-const player2El = document.getElementById("p2Tag");
 
 function BoardController() {
   const board = [];
@@ -30,18 +35,11 @@ function BoardController() {
     return true;
   };
 
-  const printBoard = () => {
-    const cellValueBoard = board.map((row) =>
-      row.map((cell) => cell.getValue()),
-    );
-    console.log(cellValueBoard);
-  };
-
   const resetBoard = () => {
     board.map((row) => row.map((cell) => cell.setValue(0)));
   };
 
-  return { getBoard, changeCell, printBoard, resetBoard };
+  return { getBoard, changeCell, resetBoard };
 }
 
 function Cell() {
@@ -57,17 +55,19 @@ function Cell() {
 function GameController() {
   const board = BoardController();
 
+  let placedCells = [];
+
   const players = [
     {
       name: "Player 1",
       value: 1,
-      element: player1El,
+      element: p1Tag,
       token: "url(./img/jbj-circle.svg)",
     },
     {
       name: "Player 2",
       value: 2,
-      element: player2El,
+      element: p2Tag,
       token: "url(./img/jbj-cross.svg)",
     },
   ];
@@ -76,17 +76,16 @@ function GameController() {
 
   const getActivePlayer = () => activePlayer;
 
-  const setPlayerName = (p, name) => {
-    player[p].name = name;
+  const setPlayerNames = (name1, name2) => {
+    players[0].name = name1;
+    players[0].element.querySelector("p").textContent = name1;
+
+    players[1].name = name2;
+    players[1].element.querySelector("p").textContent = name2;
   };
 
   const switchActivePlayer = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
-  };
-
-  const printRound = () => {
-    board.printBoard();
-    console.log(`It's ${activePlayer.name}'s turn`);
   };
 
   const checkWin = (row, col) => {
@@ -141,20 +140,22 @@ function GameController() {
 
   const playRound = (row, col) => {
     board.changeCell(row, col, activePlayer.value);
-    const { won, line } = checkWin(row, col);
+    placedCells.push([row, col]);
 
-    if (!won) {
+    const { won, line } = checkWin(row, col);
+    const tie = placedCells.length >= BOARD_SIZE * BOARD_SIZE;
+
+    if (!won && !tie) {
       switchActivePlayer();
-      printRound();
     }
 
-    return { won, line };
+    return { tie, won, line };
   };
 
   const restartGame = () => {
+    placedCells = [];
     board.resetBoard();
     switchActivePlayer();
-    printRound();
   };
 
   return {
@@ -162,21 +163,30 @@ function GameController() {
     playRound,
     restartGame,
     getBoard: board.getBoard,
-    printRound,
-    setPlayerName,
+    setPlayerNames,
   };
 }
 
-function DisplayController() {
+const display = (() => {
   const game = GameController();
 
-  const startGame = () => {};
+  const startGame = () => {
+    // !!! ADD INPUT VALIDATION
+    const p1Name = p1Input.value;
+    const p2Name = p2Input.value;
+
+    game.setPlayerNames(p1Name, p2Name);
+
+    createDisplayBoard();
+
+    startDialog.close();
+  };
 
   const displayActivePlayer = () => {
     const activePlayer = game.getActivePlayer();
 
-    player1El.classList.remove("active");
-    player2El.classList.remove("active");
+    p1Tag.classList.remove("active");
+    p2Tag.classList.remove("active");
 
     activePlayer.element.classList.add("active");
     messageEl.textContent = `${activePlayer.name}'s turn`;
@@ -184,12 +194,12 @@ function DisplayController() {
 
   const createDisplayBoard = () => {
     const board = game.getBoard();
-
     board.map((row, i) => {
       row.map((cell, j) => {
         const cellBtn = document.createElement("button");
         cellBtn.dataset.row = i;
         cellBtn.dataset.col = j;
+        cellBtn.classList.add("board-btn");
         cellBtn.addEventListener("click", cellClickHandler);
         gameboardEl.appendChild(cellBtn);
       });
@@ -207,10 +217,12 @@ function DisplayController() {
     e.target.classList.add(`selected-${active.value}`);
     e.target.style.backgroundImage = active.token;
 
-    const { won, line } = game.playRound(row, col);
+    const { tie, won, line } = game.playRound(row, col);
 
     if (won) {
       displayWin(line);
+    } else if (tie) {
+      displayTie();
     } else {
       displayActivePlayer();
     }
@@ -222,6 +234,7 @@ function DisplayController() {
   };
 
   const resetDisplay = () => {
+    endDialog.close();
     clearDisplay();
     game.restartGame();
     createDisplayBoard();
@@ -229,6 +242,11 @@ function DisplayController() {
 
   const displayWin = (line) => {
     const activePlayer = game.getActivePlayer();
+
+    p1Tag.classList.remove("active");
+    p2Tag.classList.remove("active");
+    activePlayer.element.classList.add("active");
+
     messageEl.textContent = `${activePlayer.name} won!`;
 
     line.forEach((cell) => {
@@ -238,21 +256,38 @@ function DisplayController() {
       cellEl.classList.add("winner");
     });
 
+    hideTokens();
+
+    messageEl.textContent = "We have a winner!";
+    endTitle.textContent = `${activePlayer.name} wins`;
+    endDialog.showModal();
+  };
+
+  const displayTie = () => {
+    p1Tag.classList.remove("active");
+    p2Tag.classList.remove("active");
+
+    hideTokens();
+
+    messageEl.textContent = "You both lose and win equally...";
+    endTitle.textContent = `It's a tie`;
+    endDialog.showModal();
+  };
+
+  const hideTokens = () => {
     const children = gameboardEl.querySelectorAll("button:not(.winner)");
     children.forEach((child) => {
       child.classList.add("selected-1");
       child.removeEventListener("click", cellClickHandler);
       child.style.opacity = 0.4;
     });
-
-    // !!! Display restart button/dialog
   };
 
-  createDisplayBoard();
+  return { startGame, resetDisplay };
+})();
 
-  return { resetDisplay, displayWin };
-}
+// Event Listeners
+startBtn.addEventListener("click", display.startGame);
+restartBtn.addEventListener("click", display.resetDisplay);
 
-const display = DisplayController();
-
-// !!! REMOVE PRINT FUNCTIONS
+startDialog.showModal();
