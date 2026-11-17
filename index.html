@@ -21,23 +21,36 @@
           Player 1 Name:
           <div class="row-center">
             <img src="./img/jbj-circle.svg" alt="Player 1 token" />
-            <input id="p1Input" type="text" placeholder="Player 1" />
+            <input
+              id="p1Input"
+              type="text"
+              placeholder="Player 1"
+              maxlength="20"
+            />
           </div>
         </label>
         <label for="p2Name">
           Player 2 Name:
           <div class="row-center">
             <img src="./img/jbj-cross.svg" alt="Player 2 token" />
-            <input id="p2Input" type="text" placeholder="Player 2" />
+            <input
+              id="p2Input"
+              type="text"
+              placeholder="Player 2"
+              maxlength="20"
+            />
           </div>
         </label>
+        <p id="validationEl">Validation Message Here!</p>
         <button class="dialog-btn" id="startBtn">Start Game</button>
       </div>
     </dialog>
 
     <dialog id="endDialog">
       <h2 id="endTitle">Game Over</h2>
-      <button class="dialog-btn" id="restartBtn">Play Again</button>
+      <div class="col-center">
+        <button class="dialog-btn" id="restartBtn">Play Again</button>
+      </div>
     </dialog>
 
     <div class="fullscreen">
@@ -57,7 +70,9 @@
           <p id="messageEl">Ready to play?</p>
         </div>
       </header>
+
       <main id="gameboardEl"></main>
+
       <footer class="footer">
         <a class="contact-link" href="https://github.com/jonasbj99">
           <i class="fa-brands fa-github"></i>

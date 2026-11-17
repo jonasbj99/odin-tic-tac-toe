@@ -12,6 +12,7 @@ const p1Tag = document.getElementById("p1Tag");
 const p2Tag = document.getElementById("p2Tag");
 const gameboardEl = document.getElementById("gameboardEl");
 const messageEl = document.getElementById("messageEl");
+const validationEl = document.getElementById("validationEl");
 
 function BoardController() {
   const board = [];
@@ -172,14 +173,18 @@ const display = (() => {
 
   const startGame = () => {
     // !!! ADD INPUT VALIDATION
-    const p1Name = p1Input.value;
-    const p2Name = p2Input.value;
+    const p1Name = p1Input.value.trim() != "" ? p1Input.value : "Player 1";
+    const p2Name = p2Input.value.trim() != "" ? p2Input.value : "Player 2";
 
-    game.setPlayerNames(p1Name, p2Name);
-
-    createDisplayBoard();
-
-    startDialog.close();
+    if (p1Name != p2Name) {
+      validationEl.classList.remove("open");
+      game.setPlayerNames(p1Name, p2Name);
+      createDisplayBoard();
+      startDialog.close();
+    } else {
+      validationEl.textContent = "You can't both have the same name ü";
+      validationEl.classList.add("open");
+    }
   };
 
   const displayActivePlayer = () => {
