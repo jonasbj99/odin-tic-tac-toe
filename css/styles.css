@@ -92,8 +92,6 @@ button {
 .board-grid {
   aspect-ratio: 1 / 1;
   grid-area: board;
-  max-width: 95vmin;
-  max-height: 95vmin;
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 }
@@ -124,12 +122,12 @@ button {
 /* Landscape Viewport */
 @media (orientation: landscape) {
   .main-grid {
-    height: 95vmin;
+    height: 95%;
     grid-template-areas:
       "header board"
       "footer board";
-    grid-template-columns: max-content 1fr;
-    grid-template-rows: 1fr max-content;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
   }
 
   .header-grid {
@@ -149,12 +147,12 @@ button {
 /* Portrait Viewport */
 @media (orientation: portrait) {
   .main-grid {
+    width: 95%;
     grid-template-areas:
       "header"
       "board"
       "footer";
-    grid-template-columns: 95vmin;
-    grid-template-rows: min-content 1fr min-content;
+    grid-template-rows: auto 1fr auto;
   }
 
   .header-grid {
