@@ -110,6 +110,15 @@ button {
 }
 
 .contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 10px;
+  color: var(--main-col);
+  background-color: var(--text-col);
 }
 
 /* Landscape Viewport */
@@ -119,7 +128,7 @@ button {
     grid-template-areas:
       "header board"
       "footer board";
-    grid-template-columns: min-content 1fr;
+    grid-template-columns: max-content 1fr;
     grid-template-rows: 1fr max-content;
   }
 
