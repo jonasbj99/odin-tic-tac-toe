@@ -11,10 +11,10 @@
     ></script>
 
     <link rel="stylesheet" href="./css/styles.css" />
-    <script src="./js/tictactoe.js" defer></script>
+    <!-- <script src="./js/tictactoe.js" defer></script> -->
   </head>
   <body>
-    <dialog id="startDialog">
+    <!--     <dialog id="startDialog">
       <h2>Choose Your Names</h2>
       <div class="col-center">
         <label for="p1Name">
@@ -51,27 +51,33 @@
       <div class="col-center">
         <button class="dialog-btn" id="restartBtn">Play Again</button>
       </div>
-    </dialog>
+    </dialog> -->
 
-    <div class="fullscreen">
-      <header>
+    <div class="main-grid">
+      <header class="header-grid">
+        <h1 class="header-title">Tic Tac Toe</h1>
         <div id="p1Tag" class="player-tag">
           <img src="./img/jbj-circle.svg" alt="First player token" />
           <p>Player 1</p>
-        </div>
-        <div class="title-container">
-          <h1>Tic Tac Toe</h1>
         </div>
         <div id="p2Tag" class="player-tag">
           <p>Player 2</p>
           <img src="./img/jbj-cross.svg" alt="Second player token" />
         </div>
-        <div class="message-container">
-          <p id="messageEl">Ready to play?</p>
-        </div>
+        <p class="header-msg" id="messageEl">Ready to play?</p>
       </header>
 
-      <main id="gameboardEl"></main>
+      <main class="board-grid" id="gameboardEl">
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+      </main>
 
       <footer class="footer">
         <a class="contact-link" href="https://github.com/jonasbj99">
