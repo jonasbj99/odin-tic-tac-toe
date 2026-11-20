@@ -54,22 +54,25 @@
     </dialog> -->
 
     <div class="main-grid">
-      <header class="header-grid">
+      <header class="header-container">
         <h1 class="header-title">Tic Tac Toe</h1>
-        <div id="p1Tag" class="player-tag">
-          <img src="./img/jbj-circle.svg" alt="First player token" />
-          <p>Player 1</p>
-        </div>
-        <div id="p2Tag" class="player-tag">
-          <p>Player 2</p>
-          <img src="./img/jbj-cross.svg" alt="Second player token" />
+        <div class="player-group">
+          <div id="p1Tag" class="player-tag active">
+            <img src="./img/jbj-circle.svg" alt="First player token" />
+            <p>Player 1</p>
+          </div>
+          <div id="p2Tag" class="player-tag">
+            <img src="./img/jbj-cross.svg" alt="Second player token" />
+            <p>Player 2</p>
+          </div>
         </div>
         <p class="header-msg" id="messageEl">Ready to play?</p>
       </header>
 
       <main class="board-grid" id="gameboardEl">
-        <button class="board-btn"></button>
-        <button class="board-btn"></button>
+        <!-- Placeholder buttons for CSS testing -->
+        <button class="board-btn selected-1"></button>
+        <button class="board-btn selected-2"></button>
         <button class="board-btn"></button>
         <button class="board-btn"></button>
         <button class="board-btn"></button>
