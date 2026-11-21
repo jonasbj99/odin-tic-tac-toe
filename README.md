@@ -5,3 +5,5 @@ Tic Tac Toe project from The Odin Project in the Organizing Your JavaScript Code
 ## Considered Improvements
 
 - Improve UX by changing hover to current player's token
+
+- Completely avoid scroll on specific viewport ratios
