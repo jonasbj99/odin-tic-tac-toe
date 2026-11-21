@@ -163,6 +163,7 @@ button.dialog-btn {
   background-color: var(--text-col);
   border-radius: 10px;
   text-align: center;
+  box-shadow: var(--back-shadow);
 }
 
 .header-title {
@@ -172,7 +173,6 @@ button.dialog-btn {
   color: var(--main-col);
   padding: 1rem;
   font-size: 2.5rem;
-  box-shadow: var(--back-shadow);
   background: 3.95em 0.66em / 0.44em url(../img/jbj-logo.svg) no-repeat;
 
   span {
