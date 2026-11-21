@@ -79,10 +79,14 @@ function GameController() {
 
   const setPlayerNames = (name1, name2) => {
     players[0].name = name1;
-    players[0].element.querySelector("p").textContent = name1;
+    p1TextEl = players[0].element.querySelector("p");
+    p1TextEl.textContent = name1;
+    p1TextEl.title = name1;
 
     players[1].name = name2;
-    players[1].element.querySelector("p").textContent = name2;
+    p2TextEl = players[1].element.querySelector("p");
+    p2TextEl.textContent = name2;
+    p2TextEl.title = name2;
   };
 
   const switchActivePlayer = () => {
@@ -172,13 +176,13 @@ const display = (() => {
   const game = GameController();
 
   const startGame = () => {
-    // !!! ADD INPUT VALIDATION
     const p1Name = p1Input.value.trim() != "" ? p1Input.value : "Player 1";
     const p2Name = p2Input.value.trim() != "" ? p2Input.value : "Player 2";
 
     if (p1Name != p2Name) {
       validationEl.classList.remove("open");
       game.setPlayerNames(p1Name, p2Name);
+      clearDisplay();
       createDisplayBoard();
       startDialog.close();
     } else {
