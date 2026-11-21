@@ -159,14 +159,36 @@ button.dialog-btn {
   flex-direction: column;
 }
 
-.header-title {
+.title-container {
   background-color: var(--text-col);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.header-title {
+  margin: auto;
+  position: relative;
+  width: fit-content;
   color: var(--main-col);
   padding: 1rem;
   font-size: 2.5rem;
-  text-align: center;
-  border-radius: 10px;
   box-shadow: var(--back-shadow);
+  background: 3.95em 0.66em / 0.44em url(../img/jbj-logo.svg) no-repeat;
+
+  span {
+    font-family: inherit;
+    opacity: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: 0.89em 0.43em / 0.23em url(../img/jbj-logo.svg) no-repeat;
+  }
 }
 
 .player-group {
