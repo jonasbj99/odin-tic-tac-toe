@@ -11,10 +11,10 @@
     ></script>
 
     <link rel="stylesheet" href="./css/styles.css" />
-    <!-- <script src="./js/tictactoe.js" defer></script> -->
+    <script src="./js/tictactoe.js" defer></script>
   </head>
   <body>
-    <!--     <dialog id="startDialog">
+    <dialog id="startDialog">
       <h2>Choose Your Names</h2>
       <div class="col-center">
         <label for="p1Name">
@@ -41,7 +41,9 @@
             />
           </div>
         </label>
-        <p id="validationEl">Validation Message Here!</p>
+        <p class="validation-text" id="validationEl">
+          Validation Message Here!
+        </p>
         <button class="dialog-btn" id="startBtn">Start Game</button>
       </div>
     </dialog>
@@ -51,7 +53,7 @@
       <div class="col-center">
         <button class="dialog-btn" id="restartBtn">Play Again</button>
       </div>
-    </dialog> -->
+    </dialog>
 
     <div class="main-grid">
       <header class="header-container">
@@ -69,18 +71,7 @@
         <p class="header-msg" id="messageEl">Ready to play?</p>
       </header>
 
-      <main class="board-grid" id="gameboardEl">
-        <!-- Placeholder buttons for CSS testing -->
-        <button class="board-btn selected-1"></button>
-        <button class="board-btn selected-2"></button>
-        <button class="board-btn"></button>
-        <button class="board-btn"></button>
-        <button class="board-btn"></button>
-        <button class="board-btn"></button>
-        <button class="board-btn"></button>
-        <button class="board-btn"></button>
-        <button class="board-btn"></button>
-      </main>
+      <main class="board-grid" id="gameboardEl"></main>
 
       <footer class="footer">
         <a class="contact-link" href="https://github.com/jonasbj99">
