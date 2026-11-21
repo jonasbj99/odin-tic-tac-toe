@@ -6,4 +6,4 @@ Tic Tac Toe project from The Odin Project in the Organizing Your JavaScript Code
 
 - Improve UX by changing hover to current player's token
 
-- Completely avoid scroll on specific viewport ratios
+- Completely avoid scroll when adjusting to specific viewport ratios
