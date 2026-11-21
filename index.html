@@ -16,10 +16,10 @@
   <body>
     <dialog id="startDialog">
       <h2>Choose Your Names</h2>
-      <div class="col-center">
+      <div class="dialog-center">
         <label for="p1Name">
           Player 1 Name:
-          <div class="row-center">
+          <div class="input-container">
             <img src="./img/jbj-circle.svg" alt="Player 1 token" />
             <input
               id="p1Input"
@@ -31,7 +31,7 @@
         </label>
         <label for="p2Name">
           Player 2 Name:
-          <div class="row-center">
+          <div class="input-container">
             <img src="./img/jbj-cross.svg" alt="Player 2 token" />
             <input
               id="p2Input"
@@ -50,7 +50,7 @@
 
     <dialog id="endDialog">
       <h2 id="endTitle">Game Over</h2>
-      <div class="col-center">
+      <div class="dialog-center">
         <button class="dialog-btn" id="restartBtn">Play Again</button>
       </div>
     </dialog>
@@ -71,7 +71,17 @@
         <p class="header-msg" id="messageEl">Ready to play?</p>
       </header>
 
-      <main class="board-grid" id="gameboardEl"></main>
+      <main class="board-grid" id="gameboardEl">
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+        <button class="board-btn"></button>
+      </main>
 
       <footer class="footer">
         <a class="contact-link" href="https://github.com/jonasbj99">
