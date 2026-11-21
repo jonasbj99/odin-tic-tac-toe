@@ -274,7 +274,7 @@ const display = (() => {
 
     hideTokens();
 
-    messageEl.textContent = "You both lose and win equally...";
+    messageEl.textContent = "You both win and lose equally...";
     endTitle.textContent = `It's a tie`;
     endDialog.showModal();
   };
